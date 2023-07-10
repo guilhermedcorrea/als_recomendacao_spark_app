@@ -7,8 +7,7 @@ import os
 import pandas as pd
 import warnings
 
-"""Imports das funções de chamadas das tabelas"""
-from etl_pyspark import reader_csv,executa_consulta_tabela1,reader_table,executa_consulta_tabela2
+2
 
 warnings.filterwarnings('ignore')
 
@@ -35,8 +34,8 @@ if __name__=='__main__':
     conf.set("hive.exec.dynamic.partition", "true")
     conf.set("hive.exec.dynamic.partition.mode", "nonstrict")
     conf.set("spark.sql.ansi.enabled","true")
-    conf.set('spark.driver.extraClassPath', r"C:\leads\venv\Lib\site-packages\pyspark\mssql-jdbc-9.4.0.jre11.jar")
-    conf.set('spark.executor.extraClassPath', r"C:\leads\venv\Lib\site-packages\pyspark\mssql-jdbc-9.4.0.jre11.jar")
+    conf.set('spark.driver.extraClassPath', r"\\wsl.localhost\Ubuntu-18.04\home\guilherme\als_recomendacao_spark_app\sqlserverjars\mssql-jdbc-12.2.0.jre11.jar")
+    conf.set('spark.executor.extraClassPath', r"\\wsl.localhost\Ubuntu-18.04\home\guilherme\als_recomendacao_spark_app\sqlserverjars\mssql-jdbc-12.2.0.jre11.jar")
     spark = SparkSession.builder\
             .config(conf=conf)\
             .config("spark.sql.warehouse.dir", warehouse_location)\
@@ -44,11 +43,7 @@ if __name__=='__main__':
             .enableHiveSupport() \
             .getOrCreate()
     
-    reader_csv(spark)
 
-    executa_consulta_tabela1(spark)
-    executa_consulta_tabela2(spark)
-    reader_table(spark)
 
 
 
